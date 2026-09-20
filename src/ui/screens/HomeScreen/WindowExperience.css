@@ -1,0 +1,52 @@
+.mk-window { position: relative; height: 100svh; min-height: 700px; overflow: hidden; color: #f8f1e6; background: #202927; }
+.mk-window__stage { display: flex; flex-direction: column; justify-content: center; gap: clamp(1.1rem, 2.4vh, 2rem); width: min(100%, 1600px); height: 100%; margin: auto; padding: 100px clamp(1.25rem, 4vw, 4.5rem) 2rem; }
+.mk-window__heading, .mk-window__footer { display: flex; align-items: end; justify-content: space-between; gap: 2rem; }
+.mk-window__eyebrow, .mk-window__instruction, .mk-window__heading > p { color: #d4af82; font: 11px/1.5 'JetBrains Mono', monospace; letter-spacing: .16em; text-transform: uppercase; }
+.mk-window__heading h2 { margin: .35rem 0 0; font: 400 clamp(2.3rem, 5vw, 5rem)/.98 Georgia, serif; letter-spacing: -.045em; }
+.mk-window__heading > p { max-width: 25rem; margin: 0 0 .25rem; color: #c8c3b8; text-align: right; }
+.mk-window__heading > p span { padding: 0 .25rem; color: #d4af82; }
+.mk-window__scene { position: relative; flex: 1; min-height: 300px; max-height: 650px; overflow: hidden; background: #a8aa9d; box-shadow: 0 30px 75px rgba(0,0,0,.25); }
+.mk-window__view { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 52%; transform-origin: 53% 48%; will-change: transform; }
+.mk-window__light { position: absolute; inset: 0; opacity: 0; pointer-events: none; background: linear-gradient(105deg, transparent 15%, rgba(255,239,197,.19) 70%, rgba(255,243,212,.28)); mix-blend-mode: screen; }
+.mk-window__assembly { position: absolute; inset: 0; transform-origin: 74% 52%; will-change: transform, opacity; }
+.mk-window__outer-frame { position: absolute; inset: 0; overflow: hidden; border: clamp(9px, 1vw, 16px) solid #323835; box-shadow: inset 0 0 0 2px #87908b, inset 0 5px 12px rgba(0,0,0,.38), 0 0 0 2px #a4a89d; }
+.mk-window__fixed, .mk-window__moving { position: absolute; top: 0; bottom: 0; }
+.mk-window__fixed { left: 0; width: 55%; border-right: clamp(9px, .9vw, 14px) solid #303735; box-shadow: inset 0 0 0 2px rgba(204,215,207,.36), 8px 0 18px rgba(0,0,0,.25); }
+.mk-window__fixed-glass, .mk-window__moving-glass { position: absolute; inset: 0; background: linear-gradient(112deg, rgba(228,241,239,.23), rgba(211,227,226,.06) 45%, rgba(25,47,47,.13)); box-shadow: inset 0 0 0 1px rgba(240,248,244,.45); }
+.mk-window__moving { z-index: 2; left: 55%; width: 45%; border-left: clamp(11px, 1vw, 17px) solid #303735; border-right: clamp(9px, .8vw, 13px) solid #38413d; background: rgba(208,226,227,.1); box-shadow: -9px 0 20px rgba(0,0,0,.28), inset 1px 0 rgba(214,228,221,.6); will-change: transform; }
+.mk-window__moving-glass { inset: 2px; }
+.mk-window__reflection { position: absolute; inset: 0; opacity: .45; background: linear-gradient(115deg, transparent 20%, rgba(244,252,250,.37) 30%, rgba(244,252,250,.08) 42%, transparent 57%); }
+.mk-window__handle { position: absolute; z-index: 3; top: 47%; left: 8px; width: 7px; height: 57px; border-radius: 4px; background: linear-gradient(90deg, #171e1d, #71827e 45%, #252f2d); box-shadow: 2px 2px 6px rgba(0,0,0,.5); }
+.mk-window__head-track, .mk-window__sill-track { position: absolute; z-index: 4; right: 0; left: 0; height: clamp(12px, 1.3vw, 19px); background: linear-gradient(#1f2927 0 20%, #77827d 24% 30%, #303a37 38% 56%, #8b9690 60% 66%, #222a28 70%); box-shadow: 0 3px 8px rgba(0,0,0,.34); }
+.mk-window__head-track { top: 0; }
+.mk-window__sill-track { bottom: 0; transform: rotate(180deg); }
+.mk-window__footer { min-height: 4rem; align-items: center; }
+.mk-window__story { position: relative; flex: 1; min-height: 3rem; }
+.mk-window__line { position: absolute; inset: 0 auto auto 0; margin: 0; font: 400 clamp(1.5rem, 3vw, 3rem)/1.15 Georgia, serif; letter-spacing: -.025em; }
+.mk-window__line--middle, .mk-window__line--final { visibility: hidden; opacity: 0; }
+.mk-window__instruction { white-space: nowrap; }
+.mk-window__instruction span { display: inline-block; margin-left: .65rem; font-size: 1.25rem; }
+@media (max-width: 767px) {
+  .mk-window { min-height: 620px; }
+  .mk-window__stage { gap: 1.2rem; padding: 90px 1rem 1.5rem; }
+  .mk-window__heading { display: block; }
+  .mk-window__heading > p { max-width: 100%; margin: .85rem 0 0; text-align: left; font-size: 8px; letter-spacing: .08em; }
+  .mk-window__scene { flex: 0 1 52svh; min-height: 300px; }
+  .mk-window__view { object-position: 58% center; }
+  .mk-window__footer { display: block; min-height: 6rem; }
+  .mk-window__story { min-height: 4rem; }
+  .mk-window__instruction { font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mk-window { height: auto; min-height: 0; }
+  .mk-window__stage { min-height: 760px; padding-block: 7rem 4rem; }
+  .mk-window__scene { height: clamp(330px, 52vw, 650px); flex: auto; }
+  .mk-window__moving { transform: translateX(-96%); }
+  .mk-window__light { opacity: .15; }
+  .mk-window__line--intro, .mk-window__line--middle { display: none; }
+  .mk-window__line--final { visibility: visible; opacity: 1; }
+  .mk-window__instruction { display: none; }
+}
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .mk-window__stage { min-height: 0; padding-block: 5rem 2.25rem; }
+}

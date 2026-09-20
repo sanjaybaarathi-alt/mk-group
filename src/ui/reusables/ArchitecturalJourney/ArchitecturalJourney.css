@@ -1,0 +1,47 @@
+.mk-journey { margin-top: clamp(3rem, 7vw, 7rem); color: #252c2a; background: #f2eadc; border: 1px solid #b2a894; }
+.mk-journey__heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; padding: clamp(1.5rem, 3vw, 3rem); border-bottom: 1px solid #b2a894; }
+.mk-journey__eyebrow { color: #84613f; font: 11px 'JetBrains Mono', monospace; letter-spacing: .16em; }
+.mk-journey__heading h3 { margin-top: .8rem; color: #252c2a; font: 400 clamp(2rem, 4.2vw, 4.6rem)/1.03 Georgia, serif; letter-spacing: -.045em; }
+.mk-journey__heading p { max-width: 23rem; color: #555c57; font-size: clamp(.9rem, 1.3vw, 1.05rem); line-height: 1.55; }
+.mk-journey__workspace { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(290px, .75fr); }
+.mk-journey__visual { position: relative; min-height: 510px; overflow: hidden; background: radial-gradient(circle at 50% 42%, #4c5852, #222b29 72%); }
+.mk-journey__canvas { visibility: hidden; position: absolute; inset: 0; z-index: 2; cursor: grab; touch-action: none; pointer-events: none; }
+.mk-journey.is-active .mk-journey__canvas { visibility: visible; pointer-events: auto; }
+.mk-journey__canvas:active { cursor: grabbing; }
+.mk-journey__canvas canvas { display: block; width: 100%; height: 100%; }
+.mk-journey__fallback { display: block; width: 100%; height: 100%; object-fit: cover; }
+.mk-journey.is-active .mk-journey__fallback { display: none; }
+.mk-journey__views { position: absolute; z-index: 4; top: 1.5rem; left: 1.5rem; display: flex; padding: 3px; background: rgba(21, 30, 28, .84); border: 1px solid rgba(237, 207, 170, .6); backdrop-filter: blur(8px); }
+.mk-journey__views button { min-height: 38px; padding: .35rem .8rem; border: 0; color: #f2eadc; background: transparent; font: 11px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .06em; cursor: pointer; }
+.mk-journey__views button[aria-pressed=true] { color: #252c2a; background: #f2eadc; }
+.mk-journey__views button:focus-visible, .mk-journey__controls button:focus-visible { outline: 2px solid #aa6e3a; outline-offset: -4px; }
+.mk-journey__caption { position: absolute; z-index: 3; inset: auto 1.5rem 1.5rem; display: flex; justify-content: space-between; gap: 1rem; color: #edcfaa; font: 10px 'JetBrains Mono', monospace; letter-spacing: .12em; pointer-events: none; }
+.mk-journey__controls { display: grid; grid-template-rows: repeat(4, 1fr); border-left: 1px solid #b2a894; }
+.mk-journey__controls button { appearance: none; display: grid; grid-template-columns: 2rem 1fr 1.5rem; align-items: start; gap: 1rem; width: 100%; padding: clamp(1rem, 2.1vw, 2rem); text-align: left; color: #252c2a; background: #f2eadc; border: 0; border-bottom: 1px solid #b2a894; cursor: pointer; transition: background .4s, color .4s, padding-left .4s !important; }
+.mk-journey__controls button:last-child { border-bottom: 0; }
+.mk-journey__controls button:hover { background: #e7dcc9; padding-left: clamp(1.4rem, 2.5vw, 2.4rem); transform: none !important; }
+.mk-journey__controls button[aria-pressed=true] { background: #25302d; color: #f2eadc; }
+.mk-journey__number { font: 11px 'JetBrains Mono', monospace; letter-spacing: .1em; opacity: .76; padding-top: .35rem; }
+.mk-journey__text { display: grid; gap: .45rem; }
+.mk-journey__text strong { font: 400 clamp(1.4rem, 2vw, 2rem)/1.1 Georgia, serif; }
+.mk-journey__text small { max-width: 22rem; font-size: .83rem; line-height: 1.45; opacity: .82; }
+.mk-journey__arrow { font-size: 1.35rem; transition: transform .35s; }
+.mk-journey__controls button:hover .mk-journey__arrow, .mk-journey__controls button[aria-pressed=true] .mk-journey__arrow { transform: translate(3px, -3px); }
+@media (max-width: 899px), (prefers-reduced-motion: reduce) {
+  .mk-journey.is-active .mk-journey__canvas { visibility: hidden; pointer-events: none; }
+  .mk-journey.is-active .mk-journey__fallback { display: block; }
+}
+@media (max-width: 899px) {
+  .mk-journey__heading { display: block; }
+  .mk-journey__heading p { margin-top: 1rem; }
+  .mk-journey__workspace { grid-template-columns: 1fr; }
+  .mk-journey__visual { min-height: 330px; height: 48vw; max-height: 500px; }
+  .mk-journey__controls { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; border-left: 0; }
+  .mk-journey__controls button:nth-child(odd) { border-right: 1px solid #b2a894; }
+}
+@media (max-width: 560px) {
+  .mk-journey__visual { min-height: 245px; height: 60vw; }
+  .mk-journey__controls { grid-template-columns: 1fr; }
+  .mk-journey__controls button { grid-template-columns: 1.5rem 1fr 1.5rem; padding: 1.2rem; border-right: 0 !important; }
+  .mk-journey__heading h3 { font-size: 2.4rem; }
+}

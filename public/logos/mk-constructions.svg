@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 86" role="img" aria-labelledby="title">
+  <title id="title">MK Constructions</title>
+  <path fill="#263034" d="M5 58V12h8l15 19 15-19h8v46h-9V26L28 44 14 26v32zM63 58V12h9v18l17-18h12L79 35l23 23H89L72 40v18z"/>
+  <path fill="#9a7043" d="M54 8h5v50h-5z"/>
+  <path fill="none" stroke="#9a7043" stroke-width="1" d="M5 66h260"/>
+  <text x="5" y="82" fill="#263034" font-family="Manrope,Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="4">CONSTRUCTIONS</text>
+</svg>

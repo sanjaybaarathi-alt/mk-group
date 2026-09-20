@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+    }
+
+    /* Custom Precision Architectural Grid Pattern */
+    .bg-blueprint-grid {
+      background-image: 
+        linear-gradient(to right, rgba(117, 119, 122, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(117, 119, 122, 0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .bg-dark-grid {
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Custom Cursor Mechanics */
+    @media (pointer: fine) {
+      body {
+        cursor: none;
+      }
+      a, button, input, select, textarea, [role="button"] {
+        cursor: none;
+      }
+    }
+
+    #cursor-dot {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s, border 0.2s;
+    }
+
+    /* Architectural Hairline Rules */
+    .hairline-b { border-bottom: 1px solid rgba(197, 198, 201, 0.4); }
+    .hairline-t { border-top: 1px solid rgba(197, 198, 201, 0.4); }
+    .hairline-r { border-right: 1px solid rgba(197, 198, 201, 0.4); }
+    .hairline-l { border-left: 1px solid rgba(197, 198, 201, 0.4); }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #fbf9f5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #785837;
+    }
+  
+
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 6rem; }
+body, a, button, input, select, textarea { cursor: auto !important; }
+a, button, input[type=range] { cursor: pointer !important; }
+#cursor-dot { display: none !important; }
+:focus-visible { outline: 2px solid #785837; outline-offset: 3px; }
+header nav a.mk-nav-link { position: relative; border: 0; padding-bottom: .35rem; }
+header nav a.mk-nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: #785837; transform: scaleX(0); transform-origin: left; transition: transform .32s cubic-bezier(.2,.8,.2,1); }
+header nav a.mk-nav-link:hover::after, header nav a.mk-nav-link:focus-visible::after, header nav a.mk-nav-link.is-active::after { transform: scaleX(1); }
+header nav a.mk-nav-link.is-active { color: #1b1c1a !important; }
+#hero img { opacity: 1 !important; filter: contrast(1.04) saturate(1.04); }
+#hero .bg-gradient-to-t { opacity: .5; }
+#hero .bg-radial { opacity: .18; }
+#projects img { opacity: 1 !important; filter: contrast(1.04) saturate(1.06); }
+.mk-stage-photo { animation: mk-photo-reveal .65s cubic-bezier(.2,.8,.2,1) both; }
+.mk-stage-panel > :last-child { animation: mk-content-reveal .55s cubic-bezier(.2,.8,.2,1) both; }
+.mk-stage-tab { position: relative; overflow: hidden; }
+.mk-stage-tab::after { content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: #a47b4d; transform: scaleX(0); transform-origin: left; transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+.mk-stage-tab:hover::after, .mk-stage-tab[aria-pressed=true]::after { transform: scaleX(1); }
+.mk-three-study { position: absolute; top: 1.5rem; right: 1.5rem; z-index: 12; width: min(38%, 230px); aspect-ratio: 1; border: 1px solid rgba(255,220,189,.45); background: rgba(12,17,20,.64); box-shadow: 0 12px 44px rgba(0,0,0,.26), inset 0 0 0 1px rgba(255,255,255,.06); backdrop-filter: blur(6px); pointer-events: none; }
+.mk-three-study::after { content: 'MK / SPATIAL STUDY'; position: absolute; left: .8rem; bottom: .7rem; color: #e9bf97; font: 9px 'JetBrains Mono', monospace; letter-spacing: .12em; }
+@keyframes mk-photo-reveal { from { clip-path: inset(0 100% 0 0); transform: scale(1.04); opacity: .5; } to { clip-path: inset(0 0 0 0); transform: scale(1); opacity: 1; } }
+@keyframes mk-content-reveal { from { transform: translateY(18px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

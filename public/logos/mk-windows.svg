@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 86" role="img" aria-labelledby="title">
+  <title id="title">MK Precision Windows</title>
+  <path fill="#304750" d="M5 58V12h8l15 19 15-19h8v46h-9V26L28 44 14 26v32zM63 58V12h9v18l17-18h12L79 35l23 23H89L72 40v18z"/>
+  <path fill="#829ca5" d="M54 8h5v50h-5z"/>
+  <path fill="none" stroke="#829ca5" stroke-width="1" d="M79 15v30M68 29h26"/>
+  <path fill="none" stroke="#829ca5" stroke-width="1" d="M5 66h280"/>
+  <text x="5" y="82" fill="#304750" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" letter-spacing="3">PRECISION WINDOWS</text>
+</svg>

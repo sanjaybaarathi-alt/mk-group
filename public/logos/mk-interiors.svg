@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 86" role="img" aria-labelledby="title">
+  <title id="title">MK Design Interriors</title>
+  <path fill="#5e412f" d="M5 58V12h8l15 19 15-19h8v46h-9V26L28 44 14 26v32zM63 58V12h9v18l17-18h12L79 35l23 23H89L72 40v18z"/>
+  <path fill="#b68c59" d="M54 8h5v50h-5z"/>
+  <path fill="none" stroke="#b68c59" stroke-width="1" d="M5 66h220"/>
+  <text x="5" y="82" fill="#5e412f" font-family="Manrope,Arial,sans-serif" font-size="11" font-weight="600" letter-spacing="3">DESIGN INTERRIORS</text>
+</svg>

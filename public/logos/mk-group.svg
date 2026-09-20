@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 76" role="img" aria-labelledby="title">
+  <title id="title">MK Group of Companies</title>
+  <path fill="#212222" d="M8 58V12h8l16 19 16-19h8v46h-9V26L32 44 17 26v32zM67 58V12h9v19l19-19h12L85 35l24 23H96L76 39v19z"/>
+  <path fill="#a47b4d" d="M59 4h5v54h-5zM59 4l5-4v58h-5z"/>
+  <path fill="#a47b4d" opacity=".4" d="M57 8h2v50h-2z"/>
+  <path stroke="#a47b4d" stroke-width="1" d="M120 14v46"/>
+  <text x="135" y="39" fill="#212222" font-family="Manrope,Arial,sans-serif" font-size="24" font-weight="500" letter-spacing="5">GROUP</text>
+  <text x="136" y="57" fill="#785837" font-family="Manrope,Arial,sans-serif" font-size="8" letter-spacing="3.5">OF COMPANIES</text>
+</svg>
