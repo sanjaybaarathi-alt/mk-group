@@ -61,8 +61,8 @@ export function useHomeMotion(root: React.RefObject<HTMLElement | null>): void {
         const figures = about?.querySelectorAll<HTMLElement>('.font-headline-md');
         figures?.forEach((figure, index) => {
           if (index > 2) return;
-          const final = [24, 340, 1.8][index];
-          const suffix = ['+', '+', 'M'][index];
+          const final = [6, 20, 1][index];
+          const suffix = ['+', '+', 'L'][index];
           const counter = { value: 0 };
           gsap.to(counter, {
             value: final, duration: 1.5, ease: 'power2.out',
