@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import stages from './ecosystemStages.json';
-import { calculateEnquiryEstimate, type ConstructionTier, type EnquiryServices, type WindowTier } from './enquiryPricing.ts';
+import { calculateEnquiryEstimate, type ConstructionTier, type EnquiryServices, type InteriorTier, type WindowTier } from './enquiryPricing.ts';
 import { buildWhatsAppEnquiry, buildWhatsAppUrl, defaultWhatsAppNumber } from './whatsappEnquiry.ts';
 
 type Division = 'constructions' | 'interiors' | 'windows' | 'process';
@@ -12,11 +12,13 @@ export function useHomeScreenViewModel() {
   const [activeDivision, setActiveDivision] = useState<Division>('constructions');
   const navigationTarget = useRef<Division | null>(null);
   const [services, setServices] = useState<EnquiryServices>({ construction: true, interiors: false, windows: false });
-  const [constructionTier, setConstructionTier] = useState<ConstructionTier>('luxury');
+  const [constructionTier, setConstructionTier] = useState<ConstructionTier>('standard');
+  const [interiorTier, setInteriorTier] = useState<InteriorTier>('glossy');
   const [windowTier, setWindowTier] = useState<WindowTier>('sliding');
   const [squareFeet, setSquareFeet] = useState(500);
+  const [interiorSquareFeet, setInteriorSquareFeet] = useState(500);
   const [windowSquareFeet, setWindowSquareFeet] = useState(500);
-  const estimate = calculateEnquiryEstimate(services, constructionTier, windowTier, squareFeet, windowSquareFeet);
+  const estimate = calculateEnquiryEstimate(services, constructionTier, interiorTier, windowTier, squareFeet, interiorSquareFeet, windowSquareFeet);
   const [comparison, setComparison] = useState(50);
   const [preset, setPreset] = useState('living');
   const [formError, setFormError] = useState('');
@@ -122,7 +124,7 @@ export function useHomeScreenViewModel() {
         name: value('full_name'), email: value('email_address'), phone: value('phone_number'),
         location: value('site_location_city'), propertyType: value('property_type'),
         notes: value('brief_project_notes'), services, constructionTier, builtUpArea: squareFeet,
-        windowTier, glazingArea: windowSquareFeet, estimatedTotal: estimate.total,
+        interiorTier, interiorArea: interiorSquareFeet, windowTier, glazingArea: windowSquareFeet, estimatedTotal: estimate.total,
       });
       const url = buildWhatsAppUrl(import.meta.env.VITE_WHATSAPP_NUMBER || defaultWhatsAppNumber, message);
       setFormError('');
@@ -136,8 +138,8 @@ export function useHomeScreenViewModel() {
   return {
     menuOpen, setMenuOpen, modalOpen, openModal, closeModal,
     stage, setStage, stageContent: stages[stage], activeDivision, selectDivision,
-    services, setServices, constructionTier, setConstructionTier, windowTier, setWindowTier,
-    squareFeet, setSquareFeet, windowSquareFeet, setWindowSquareFeet, estimate,
+    services, setServices, constructionTier, setConstructionTier, interiorTier, setInteriorTier, windowTier, setWindowTier,
+    squareFeet, setSquareFeet, interiorSquareFeet, setInteriorSquareFeet, windowSquareFeet, setWindowSquareFeet, estimate,
     comparison, setComparison, preset, setPreset,
     formError, whatsappUrl, submitEnquiry,
   };

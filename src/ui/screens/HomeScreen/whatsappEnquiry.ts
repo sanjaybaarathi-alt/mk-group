@@ -1,4 +1,4 @@
-import { constructionTiers, formatInr, windowTiers, type ConstructionTier, type EnquiryServices, type WindowTier } from './enquiryPricing.ts';
+import { constructionTiers, formatInr, interiorTiers, windowTiers, type ConstructionTier, type EnquiryServices, type InteriorTier, type WindowTier } from './enquiryPricing.ts';
 
 export const defaultWhatsAppNumber = '919344237897';
 
@@ -12,6 +12,8 @@ type EnquiryDetails = {
   services: EnquiryServices;
   constructionTier: ConstructionTier;
   builtUpArea: number;
+  interiorTier: InteriorTier;
+  interiorArea: number;
   windowTier: WindowTier;
   glazingArea: number;
   estimatedTotal: number;
@@ -38,8 +40,11 @@ export function buildWhatsAppEnquiry(details: EnquiryDetails): string {
   if (details.services.construction) {
     lines.push(`Construction: ${constructionTiers[details.constructionTier].label}, ${details.builtUpArea.toLocaleString('en-IN')} sq ft built-up area`);
   }
+  if (details.services.interiors) {
+    lines.push(`Interiors: ${interiorTiers[details.interiorTier].label}, ${details.interiorArea.toLocaleString('en-IN')} sq ft interior area`);
+  }
   if (details.services.windows) {
-    lines.push(`Windows: ${windowTiers[details.windowTier].label}, ${details.glazingArea.toLocaleString('en-IN')} sq ft glazing area (sample rate)`);
+    lines.push(`Windows: ${windowTiers[details.windowTier].label}, ${details.glazingArea.toLocaleString('en-IN')} sq ft glazing area`);
   }
   if (details.estimatedTotal) lines.push(`Indicative priced-services subtotal: ${formatInr(details.estimatedTotal)}`);
   if (details.services.interiors) lines.push('Interior design: separate quotation requested');

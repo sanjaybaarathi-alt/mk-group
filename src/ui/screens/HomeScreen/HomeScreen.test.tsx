@@ -75,35 +75,31 @@ describe('MK Group home screen', () => {
     expect(screen.getByRole('checkbox', { name: 'MK Constructions' })).not.toBeChecked();
   });
 
-  it('prices construction and windows independently and combines selected services', () => {
+  it('prices construction, interiors, and windows with the approved rates', () => {
     render(<HomeScreen />);
     fireEvent.click(screen.getByRole('button', { name: 'Enquire' }));
     const total = screen.getByLabelText('Indicative total');
     expect(screen.getByRole('slider', { name: 'BUILT-UP SQUARE FEET' })).toHaveAttribute('min', '500');
-    expect(total).toHaveTextContent('₹12,50,000');
+    expect(total).toHaveTextContent('10,00,000');
 
-    fireEvent.change(screen.getByRole('combobox', { name: 'CONSTRUCTION FINISH' }), { target: { value: 'premium' } });
-    expect(total).toHaveTextContent('₹10,00,000');
-    fireEvent.change(screen.getByRole('combobox', { name: 'CONSTRUCTION FINISH' }), { target: { value: 'standard' } });
-    expect(total).toHaveTextContent('₹9,50,000');
-    fireEvent.change(screen.getByRole('slider', { name: 'BUILT-UP SQUARE FEET' }), { target: { value: '1000' } });
-    expect(total).toHaveTextContent('₹19,00,000');
+    fireEvent.change(screen.getByRole('combobox', { name: 'CONSTRUCTION PACKAGE' }), { target: { value: 'premium' } });
+    expect(total).toHaveTextContent('11,50,000');
+    fireEvent.change(screen.getByRole('combobox', { name: 'CONSTRUCTION PACKAGE' }), { target: { value: 'luxury' } });
+    expect(total).toHaveTextContent('15,00,000');
 
     fireEvent.click(screen.getByRole('checkbox', { name: 'MK Constructions' }));
     fireEvent.click(screen.getByRole('checkbox', { name: 'MK Precision Windows' }));
-    expect(total).toHaveTextContent('₹4,50,000');
-    fireEvent.change(screen.getByRole('combobox', { name: 'WINDOW SYSTEM' }), { target: { value: 'acoustic' } });
-    expect(total).toHaveTextContent('₹6,00,000');
-    fireEvent.change(screen.getByRole('combobox', { name: 'WINDOW SYSTEM' }), { target: { value: 'slimline' } });
-    expect(total).toHaveTextContent('₹7,50,000');
-    fireEvent.change(screen.getByRole('slider', { name: 'WINDOW / GLAZING SQUARE FEET' }), { target: { value: '1000' } });
-    expect(total).toHaveTextContent('₹15,00,000');
-    fireEvent.change(screen.getByRole('combobox', { name: 'WINDOW SYSTEM' }), { target: { value: 'acoustic' } });
-    fireEvent.change(screen.getByRole('slider', { name: 'WINDOW / GLAZING SQUARE FEET' }), { target: { value: '500' } });
-    fireEvent.click(screen.getByRole('checkbox', { name: 'MK Constructions' }));
-    expect(total).toHaveTextContent('₹25,00,000');
+    expect(total).toHaveTextContent('1,95,000');
+    fireEvent.change(screen.getByRole('combobox', { name: 'UPVC WINDOW TYPE' }), { target: { value: 'openMesh' } });
+    expect(total).toHaveTextContent('2,65,000');
+    fireEvent.change(screen.getByRole('combobox', { name: 'UPVC WINDOW TYPE' }), { target: { value: 'fixed' } });
+    expect(total).toHaveTextContent('22,500');
+
     fireEvent.click(screen.getByRole('checkbox', { name: 'MK Design Interriors' }));
-    expect(screen.getByText(/quoted separately after a design brief/i)).toBeInTheDocument();
+    expect(screen.getByRole('combobox', { name: 'INTERIOR PACKAGE' })).toHaveValue('glossy');
+    expect(total).toHaveTextContent('2,02,500');
+    fireEvent.change(screen.getByRole('combobox', { name: 'INTERIOR PACKAGE' }), { target: { value: 'diamond' } });
+    expect(total).toHaveTextContent('2,82,500');
   });
 
   it('supports keyboard comparison control', () => {

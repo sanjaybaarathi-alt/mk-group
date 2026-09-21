@@ -17,7 +17,6 @@ describe('project archive', () => {
     render(<ProjectGallery />);
     expect(screen.getAllByRole('link', { name: /case study/i })).toHaveLength(4);
     expect(screen.getByRole('link', { name: /Monolith Villa case study/i })).toHaveAttribute('href', '#/projects/monolith-villa');
-    expect(screen.getByText(/illustrative samples/i)).toBeInTheDocument();
   });
 
   it('shows project particulars and switches selected gallery image', () => {

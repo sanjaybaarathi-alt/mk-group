@@ -23,7 +23,7 @@ The portfolio section links to individual case study pages at `#/projects/<slug>
 
 The enquiry form opens WhatsApp Click to Chat with a prefilled service-specific message. The visitor reviews the message and presses Send in WhatsApp; the site does not send or store enquiries. The configured destination is `919344237897` (provided by MK); override it with `VITE_WHATSAPP_NUMBER` in `.env.local` if the business number changes. The business claims, project descriptions, office locations, testimonial, and warranty terms in the supplied design need review before public launch.
 
-The enquiry estimator starts at 500 sq ft. Construction planning rates are Luxury ₹2,500, Premium ₹2,000, and Standard ₹1,900 per built-up sq ft. The three window rates in `enquiryPricing.ts` (₹900, ₹1,200, and ₹1,500 per sq ft of glazing) are explicitly labeled sample values. Construction and glazing use separate area controls and add together when both are selected. MK Design Interriors requires a separate quote and is excluded from the numeric subtotal. These figures are indicative, not a formal quotation.
+The enquiry estimator starts construction at 500 sq ft. Construction rates are Standard ₹2,000, Premium ₹2,300, and Luxury ₹3,000 per built-up sq ft. Interior packages are Glossy ₹360, Texture ₹390, Magma ₹450, Gold ₹500, and Diamond ₹520 per sq ft. uPVC options are Sliding (2-track / 3-track) ₹390, Sliding with mesh ₹430, Openable ₹490, Openable with mesh ₹530, and Fixed ₹45 per sq ft. Each service has its own area control, and selected services add together. All totals remain indicative until MK issues a formal quotation.
 
 ## Preview hosting
 
