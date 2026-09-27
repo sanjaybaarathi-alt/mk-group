@@ -22,7 +22,7 @@ type EnquiryDetails = {
 export function buildWhatsAppEnquiry(details: EnquiryDetails): string {
   const serviceNames = [
     details.services.construction && 'MK Constructions',
-    details.services.interiors && 'MK Design Interriors',
+    details.services.interiors && 'MK Design Interiors',
     details.services.windows && 'MK Precision Windows',
   ].filter(Boolean).join(', ');
   const lines = [

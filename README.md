@@ -1,30 +1,79 @@
 # MK Group of Companies frontend
 
-React, TypeScript, Vite, Tailwind CSS and GSAP implementation of the supplied Stitch page.
+Production-oriented React, TypeScript, Vite, GSAP and Three.js website for MK Group of Companies.
 
-## Run
+## Run locally
 
 ```sh
 npm install
 npm run dev
 ```
 
-Use `npm run build`, `npm run lint`, and `npm run test` for checks.
+Quality gates:
 
-`initialCut.html` remains the approved visual source. `scripts/extract-design.mjs` extracts its Tailwind theme, custom CSS, and ecosystem content. Run it after changing those source sections. `HomeScreen.tsx` maps the preserved markup to React controls; `HomeScreen.vm.ts` owns interaction and form state. This keeps the initial visual conversion traceable to the approved HTML.
+```sh
+npm run typecheck
+npm run lint
+npm test
+npm run test:e2e
+npm run build
+```
 
-Site photos are local WebP assets mapped in `imageAssets.ts`. Full-resolution source PNGs are in `assets/source-images/`; run `node scripts/optimize-images.mjs` after editing them. Division SVG marks in `public/logos/` are interpretations of the supplied logo sheet; replace them with official vector files when available. The interactive build study and its ThreeUI reference are documented in [docs/threeui-motion-reference.md](docs/threeui-motion-reference.md). The page-wide animation and design references are in [docs/motion-direction.md](docs/motion-direction.md).
+## Architecture
 
-The landing hero uses a short architectural aperture and masked headline reveal over its project photograph. The same aperture geometry introduces the three business photographs. The interactive Three.js house remains in the ecosystem section, where it loads near the viewport and pauses when offscreen.
+- `src/ui/screens/HomeScreen/` contains the landing page, enquiry ViewModel, construction hero and Precision Windows interaction.
+- `src/ui/projects/` contains the concept portfolio and project detail route.
+- `src/tokens.css` contains shared visual and motion tokens.
+- `src/app.css` contains global foundations.
+- Component-specific styles remain colocated with their React components.
+- Manrope, Newsreader and JetBrains Mono are self-hosted through Fontsource.
+- Three.js loads dynamically only when the scroll-built construction hero can run.
+- Reduced-motion visitors and browsers without WebGL receive the static completed-home image.
 
-The Precision Windows demonstration uses a reversible GSAP ScrollTrigger timeline pinned to scroll. One uPVC sash slides left on a two-track frame; reflection, daylight, and copy follow the same progress. Reduced-motion visitors see the open state without pinning. Its clean terrace plate at `public/images/window-open-plate.webp` is an illustrative generated edit of the existing terrace image, not a verified product photograph.
+The construction hero implementation and material licensing are documented in [docs/construction-hero.md](docs/construction-hero.md). Page-wide motion principles are documented in [docs/motion-direction.md](docs/motion-direction.md).
 
-The portfolio section links to individual case study pages at `#/projects/<slug>`. A selected card photograph expands into the detail hero when motion is enabled; reduced-motion navigation is immediate. Edit [src/ui/projects/projects.ts](src/ui/projects/projects.ts) to add projects, photo galleries, and verified facts. The four current records and their budgets, durations, and images are **illustrative sample content**. Each page labels them clearly for the preview. The gallery uses pointer-responsive perspective cards, and each case study offers a selectable image set and project particulars.
+## Portfolio content
 
-The enquiry form opens WhatsApp Click to Chat with a prefilled service-specific message. The visitor reviews the message and presses Send in WhatsApp; the site does not send or store enquiries. The configured destination is `919344237897` (provided by MK); override it with `VITE_WHATSAPP_NUMBER` in `.env.local` if the business number changes. The business claims, project descriptions, office locations, testimonial, and warranty terms in the supplied design need review before public launch.
+The current records in [src/ui/projects/projects.ts](src/ui/projects/projects.ts) are explicitly presented as **concept studies**. Their locations, areas, dates, durations and indicative budgets must be replaced with approved MK project information before they are presented as completed work. Project routes use `/projects/<slug>` and are supported on static hosting by `public/_redirects`.
 
-The enquiry estimator starts construction at 500 sq ft. Construction rates are Standard ₹2,000, Premium ₹2,300, and Luxury ₹3,000 per built-up sq ft. Interior packages are Glossy ₹360, Texture ₹390, Magma ₹450, Gold ₹500, and Diamond ₹520 per sq ft. uPVC options are Sliding (2-track / 3-track) ₹390, Sliding with mesh ₹430, Openable ₹490, Openable with mesh ₹530, and Fixed ₹45 per sq ft. Each service has its own area control, and selected services add together. All totals remain indicative until MK issues a formal quotation.
+## Enquiry flow
 
-## Preview hosting
+The enquiry form:
 
-The static React/Vite site can be hosted on Cloudflare Pages without a form server. For automatic deployments, connect the `main` branch of `sanjaybaarathi-alt/mk-group` in **Workers & Pages → Create application → Pages → Connect to Git**. Use build command `npm run build`, output directory `dist`, and the repository root as the root directory. Cloudflare will redeploy after each push to `main`. The labeled sample portfolio content remains visible until verified project material is available. The current `#/projects/...` routes work on static hosting; search-friendly service and project URLs are a separate SEO improvement.
+- Validates contact fields inline.
+- Calculates construction, interior and uPVC estimates independently.
+- Combines selected services into one indicative total.
+- Opens WhatsApp Click to Chat with a prefilled message.
+- Does not silently send or store customer information.
+
+The WhatsApp destination defaults to `919344237897`. Override it with `VITE_WHATSAPP_NUMBER` in `.env.local`.
+
+Current rates:
+
+- Construction: Standard ₹2,000, Premium ₹2,300, Luxury ₹3,000 per built-up sq ft.
+- Interiors: Glossy ₹360, Texture ₹390, Magma ₹450, Gold ₹500, Diamond ₹520 per sq ft.
+- uPVC: Sliding ₹390, Sliding with mesh ₹430, Openable ₹490, Openable with mesh ₹530, Fixed ₹45 per sq ft.
+
+All totals are planning estimates until MK issues a formal quotation.
+
+## Team photographs
+
+Place approved engineer portraits at:
+
+```text
+public/images/team/praveen.webp
+public/images/team/dhilip-kumar.webp
+```
+
+Until those assets are supplied, the enquiry panel uses initials and verified credentials.
+
+## Hosting
+
+For Cloudflare Pages or Vercel:
+
+- Build command: `npm run build`
+- Output directory: `dist`
+- Node project root: repository root
+- Production branch: `main`
+
+Connect the GitHub repository for automatic deployment after each push.

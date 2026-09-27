@@ -13,17 +13,18 @@ beforeAll(() => {
 afterEach(cleanup);
 
 describe('project archive', () => {
-  it('links every sample project to an individual page', () => {
+  it('links every concept study to an individual page', () => {
     render(<ProjectGallery />);
-    expect(screen.getAllByRole('link', { name: /case study/i })).toHaveLength(4);
-    expect(screen.getByRole('link', { name: /Monolith Villa case study/i })).toHaveAttribute('href', '/projects/monolith-villa');
+    expect(screen.getAllByRole('link', { name: /concept study/i })).toHaveLength(4);
+    expect(screen.getByRole('link', { name: /Monolith Villa concept study/i })).toHaveAttribute('href', '/projects/monolith-villa');
   });
 
   it('shows project particulars and switches selected gallery image', () => {
     render(<ProjectDetail slug="monolith-villa" />);
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('The Monolith Villa');
     expect(screen.getByText('11,200 sq ft')).toBeInTheDocument();
-    expect(screen.getByText('₹7.2 Cr')).toBeInTheDocument();
+    expect(screen.getByText('Indicative ₹7.2 Cr')).toBeInTheDocument();
+    expect(screen.getByText('Concept study')).toBeInTheDocument();
     const image = screen.getByAltText('Modern villa illuminated at dusk');
     expect(image).toHaveAttribute('src', '/images/villa-hero.webp');
     fireEvent.click(screen.getByRole('button', { name: 'Show Terrace' }));
@@ -33,7 +34,7 @@ describe('project archive', () => {
   it('carries the selected card image into its detail hero', async () => {
     vi.stubGlobal('matchMedia', () => ({ matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() }));
     const gallery = render(<ProjectGallery />);
-    fireEvent.click(screen.getByRole('link', { name: /Monolith Villa case study/i }));
+    fireEvent.click(screen.getByRole('link', { name: /Monolith Villa concept study/i }));
     expect(window.location.pathname).toBe('/projects/monolith-villa');
     expect(document.querySelector('.mk-project-transition img')).toHaveAttribute('src', '/images/villa-hero.webp');
     gallery.unmount();

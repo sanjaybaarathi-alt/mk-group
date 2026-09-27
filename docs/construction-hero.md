@@ -30,6 +30,6 @@ The production site loads these assets locally and does not depend on Poly Haven
 
 ## Verification
 
-Run `npm run test:e2e` with Microsoft Edge installed. The browser tests cover forward and reverse construction, pausing, skip navigation, enquiry controls, mobile overflow, reduced motion, keyboard comparison control and WebGL failure. Unit tests verify anchored column growth and construction order.
+Run `npm run test:e2e` with Microsoft Edge installed. The browser tests cover forward and reverse construction, pausing, skip navigation, mobile ecosystem motion, the unpinned mobile window interaction, enquiry validation, project metadata and focus, keyboard comparison control, reduced motion, and WebGL failure. Unit tests verify anchored column growth and construction order.
 
 Photographic architectural quality would require an artist-authored model with baked lighting or a rendered image sequence exported from the same model. Independent generated photographs cannot maintain exact geometry between construction stages.

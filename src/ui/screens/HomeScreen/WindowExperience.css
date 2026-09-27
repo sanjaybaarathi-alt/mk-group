@@ -1,8 +1,8 @@
 .mk-window { position: relative; height: 100svh; min-height: 580px; overflow: hidden; color: #f8f1e6; background: #202927; }
 .mk-window__stage { display: flex; flex-direction: column; justify-content: center; gap: clamp(1.1rem, 2.4vh, 2rem); width: min(100%, 1600px); height: 100%; margin: auto; padding: 100px clamp(1.25rem, 4vw, 4.5rem) 2rem; }
 .mk-window__heading, .mk-window__footer { display: flex; align-items: end; justify-content: space-between; gap: 2rem; }
-.mk-window__eyebrow, .mk-window__instruction, .mk-window__heading > p { color: #d4af82; font: 11px/1.5 'JetBrains Mono', monospace; letter-spacing: .16em; text-transform: uppercase; }
-.mk-window__heading h2 { margin: .35rem 0 0; font: 400 clamp(2.3rem, 5vw, 5rem)/.98 'Newsreader', Georgia, serif; letter-spacing: -.045em; }
+.mk-window__eyebrow, .mk-window__instruction, .mk-window__heading > p { color: #d4af82; font: 11px/1.5 'JetBrains Mono Variable', monospace; letter-spacing: .16em; text-transform: uppercase; }
+.mk-window__heading h2 { margin: .35rem 0 0; font: 400 clamp(2.3rem, 5vw, 5rem)/.98 'Newsreader Variable', Georgia, serif; letter-spacing: -.045em; }
 .mk-window__heading > p { max-width: 25rem; margin: 0 0 .25rem; color: #c8c3b8; text-align: right; }
 .mk-window__heading > p span { padding: 0 .25rem; color: #d4af82; }
 .mk-window__scene { position: relative; flex: 1; min-height: 300px; max-height: 650px; overflow: hidden; background: #a8aa9d; box-shadow: 0 30px 75px rgba(0,0,0,.25); }
@@ -22,7 +22,7 @@
 .mk-window__sill-track { bottom: 0; transform: rotate(180deg); }
 .mk-window__footer { min-height: 4rem; align-items: center; }
 .mk-window__story { position: relative; flex: 1; min-height: 3rem; }
-.mk-window__line { position: absolute; inset: 0 auto auto 0; margin: 0; font: 400 clamp(1.5rem, 3vw, 3rem)/1.15 'Newsreader', Georgia, serif; letter-spacing: -.025em; }
+.mk-window__line { position: absolute; inset: 0 auto auto 0; margin: 0; font: 400 clamp(1.5rem, 3vw, 3rem)/1.15 'Newsreader Variable', Georgia, serif; letter-spacing: -.025em; }
 .mk-window__line--middle, .mk-window__line--final { visibility: hidden; opacity: 0; }
 .mk-window__instruction { white-space: nowrap; }
 .mk-window__instruction span { display: inline-block; margin-left: .65rem; font-size: 1.25rem; }

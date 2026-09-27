@@ -1,0 +1,134 @@
+/* Guided project briefing drawer. */
+.mk-modal { justify-content: space-between; align-items: stretch; }
+.mk-modal__aside { width: min(38vw,44rem); min-width: 27rem; padding: clamp(2.5rem,5vw,6rem); color: #f0eee6; background: linear-gradient(145deg,rgba(29,42,34,.96),rgba(10,16,13,.98)),url('/images/structure.webp') center/cover; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; opacity: 0; transform: translateX(-2rem); transition: opacity .45s ease,transform .55s cubic-bezier(.2,.8,.2,1); }
+.mk-modal.is-open .mk-modal__aside { opacity: 1; transform: none; }
+.mk-modal__aside > img { width: 180px; filter: brightness(0) invert(1); }
+.mk-modal__aside > div > span, .mk-modal__aside-note { color: #d6ab77; font: 500 .65rem/1.5 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.mk-modal__aside h2 { max-width: 10ch; margin: 1.25rem 0 1.5rem; font: 400 clamp(3.4rem,5vw,6rem)/.86 var(--serif); letter-spacing: -.058em; }
+.mk-modal__aside > div > p { max-width: 39rem; margin: 0; color: rgba(240,238,230,.66); font-size: 1rem; line-height: 1.75; }
+.mk-modal__aside ol { list-style: none; margin: auto 0 0; padding: 0; border-top: 1px solid rgba(255,255,255,.2); }
+.mk-modal__aside li { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,.2); align-items: center; }
+.mk-modal__aside li span { color: #d6ab77; font: 500 .62rem var(--mono); }
+.mk-modal__aside li strong { font-size: .88rem; font-weight: 500; }
+.mk-modal__aside-note { margin: 0; color: rgba(240,238,230,.48); }
+.mk-modal__panel { width: min(68vw,67rem); padding: clamp(2rem,3.5vw,4.25rem); }
+.mk-modal__head { align-items: flex-start; padding-bottom: 1.5rem; }
+.mk-modal__head > div { flex: 1; min-width: 0; }
+.mk-modal__head h2 { max-width: 10ch; margin-top: .65rem; font-size: clamp(3.2rem,4.6vw,5.6rem); line-height: .88; }
+.mk-modal__head button { flex: none; transition: color .2s,background-color .2s,transform .2s; }
+.mk-modal__head button:hover { color: #f2eee6; background: #263a2f; }
+.mk-modal__steps { display: grid; grid-template-columns: repeat(3,1fr); margin-top: 1.8rem; border-top: 1px solid #abb5ad; }
+.mk-modal__steps span { padding: .75rem .5rem .2rem 0; color: #6d7971; border-right: 1px solid #c6cdc7; font-size: .56rem; }
+.mk-modal form { padding-top: 2rem; }
+.mk-form-grid { gap: 1.35rem; }
+.mk-form-grid label,.mk-form-notes { display: grid; gap: .55rem; color: #59665e; }
+.mk-form-grid input,.mk-form-notes textarea { min-height: 3.4rem; margin: 0; padding: .9rem 1rem; color: #1d2c24; background: rgba(255,255,255,.54); border: 1px solid #b8c1ba; }
+.mk-form-grid input::placeholder,.mk-form-notes textarea::placeholder { color: #8c9790; }
+.mk-form-grid input:hover,.mk-form-notes textarea:hover { border-color: #87958b; }
+.mk-form-notes { margin-top: 2rem; }
+.mk-form-submit { min-height: 4.2rem; margin-top: 2rem; background: #23382c; transition: background-color .25s,transform .25s; }
+.mk-form-submit:hover { background: #365540; }
+.mk-form-error { padding: .8rem 1rem; color: #7a281f; background: #f2ddd8; border-left: 3px solid #a13f32; }
+.mk-form-status { color: #1f3929; background: #dae7db; border-left: 3px solid #426b4c; }
+@media (max-width: 1100px) {
+  .mk-modal__aside { display: none; }
+  .mk-modal__panel { width: min(100%,54rem); }
+}
+@media (max-width: 600px) {
+  .mk-modal__panel { padding: 1.25rem; }
+  .mk-modal__head h2 { font-size: 2.7rem; }
+  .mk-modal__steps { margin-top: 1.2rem; }
+  .mk-modal__steps span { font-size: .48rem; letter-spacing: .05em; }
+}
+
+.mk-modal__head { position: relative; top: auto; }
+.mk-form-grid + .mk-estimator { margin-top: 2rem; }
+@media (max-width: 600px) { .mk-form-grid + .mk-estimator { margin-top: 2.5rem; } }
+
+/* Compact consultation layout and accountable team. */
+.mk-modal__aside { flex: 1 1 auto; width: auto; min-width: 25rem; padding: clamp(2.5rem, 4vw, 4.5rem); }
+.mk-modal__aside h2 { font-size: clamp(3rem, 4vw, 4.8rem); }
+.mk-modal__panel { flex: 0 0 min(57vw, 54rem); width: min(57vw, 54rem); padding: clamp(1.75rem, 2.7vw, 3rem); }
+.mk-modal__head h2 { max-width: 11ch; font-size: clamp(2.65rem, 3.5vw, 4.15rem); line-height: .92; }
+.mk-modal__head { padding-bottom: 1.15rem; }
+.mk-modal__steps { margin-top: 1.25rem; }
+.mk-modal form { padding-top: 1.5rem; }
+.mk-form-grid { gap: 1rem 1.25rem; }
+.mk-form-grid input, .mk-form-notes textarea { min-height: 3.05rem; padding: .75rem .85rem; }
+.mk-engineers { display: grid; grid-template-columns: minmax(12rem, .78fr) minmax(0, 1.22fr); gap: 1.5rem; margin-top: 2rem; padding: 1.35rem; color: #eef1e9; background: #23342b; border: 1px solid #506158; }
+.mk-engineers__intro > span { color: #d4aa77; font: 500 .58rem/1.4 var(--mono); letter-spacing: .14em; }
+.mk-engineers__intro h3 { margin: .55rem 0 .4rem; font: 400 1.6rem/1 var(--serif); letter-spacing: -.025em; }
+.mk-engineers__intro p { margin: 0; color: rgba(238,241,233,.62); font-size: .76rem; line-height: 1.55; }
+.mk-engineers__list { display: grid; grid-template-columns: 1fr 1fr; align-content: center; border-left: 1px solid rgba(255,255,255,.16); }
+.mk-engineers article { display: grid; grid-template-columns: 2.75rem 1fr; gap: .75rem; align-items: center; padding: .4rem 1rem; }
+.mk-engineers article + article { border-left: 1px solid rgba(255,255,255,.16); }
+.mk-engineers__portrait { display: grid; place-items: center; width: 2.75rem; aspect-ratio: 1; color: #1f2d26; background: #d6ae7d; border-radius: 50%; font: 500 1.15rem var(--serif); }
+.mk-engineers article div { display: grid; gap: .16rem; }
+.mk-engineers strong { font: 500 .86rem var(--sans); }
+.mk-engineers small { color: rgba(238,241,233,.6); font-size: .62rem; line-height: 1.35; }
+
+/* Mobile ecosystem cards visibly assemble as they enter the viewport. */
+@media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .mk-service .mk-service__visual { clip-path: inset(0 0 10% 0); transform: translateY(1.5rem); transition: clip-path .85s cubic-bezier(.2,.8,.2,1), transform .85s cubic-bezier(.2,.8,.2,1); }
+  .mk-service .mk-service__copy { transform: translateY(1rem); transition: transform .7s .12s cubic-bezier(.2,.8,.2,1); }
+  .mk-service.is-mobile-visible .mk-service__visual { clip-path: inset(0); transform: none; }
+  .mk-service.is-mobile-visible .mk-service__copy { transform: none; }
+}
+@media (max-width: 1100px) {
+  .mk-modal { justify-content: flex-end; }
+  .mk-modal__panel { flex-basis: min(100%, 50rem); width: min(100%, 50rem); }
+}
+@media (max-width: 700px) {
+  .mk-engineers { grid-template-columns: 1fr; }
+  .mk-engineers__list { grid-template-columns: 1fr; border-top: 1px solid rgba(255,255,255,.16); border-left: 0; padding-top: .65rem; }
+  .mk-engineers article { padding: .55rem 0; }
+  .mk-engineers article + article { border-top: 1px solid rgba(255,255,255,.13); border-left: 0; }
+}
+
+/* Enquiry briefing panel must fit inside the viewport, not read like a second hero. */
+.mk-modal__aside {
+  flex: 0 1 30rem;
+  min-width: 21rem;
+  max-width: 30rem;
+  min-height: 0;
+  overflow: hidden;
+  padding: clamp(1.75rem, 2.5vw, 3rem);
+  gap: clamp(1.25rem, 2.2vh, 2rem);
+}
+.mk-modal__aside > img { width: clamp(8rem, 10vw, 9.5rem); height: auto; }
+.mk-modal__aside h2 {
+  max-width: 9ch;
+  margin: .75rem 0 1rem;
+  font-size: clamp(2.65rem, 3.5vw, 4.15rem);
+  line-height: .86;
+}
+.mk-modal__aside > div > p { max-width: 32rem; font-size: .88rem; line-height: 1.6; }
+.mk-modal__aside ol { margin-top: auto; }
+.mk-modal__aside li { grid-template-columns: 2.25rem 1fr; gap: .75rem; padding: clamp(.62rem, 1.25vh, .9rem) 0; }
+.mk-modal__aside li strong { font-size: .78rem; }
+.mk-modal__aside-note { font-size: .55rem; line-height: 1.4; }
+@media (max-width: 1360px) {
+  .mk-modal__aside { display: none; }
+  .mk-modal__panel { flex-basis: min(100%, 52rem); width: min(100%, 52rem); }
+}
+@media (max-height: 780px) and (min-width: 1361px) {
+  .mk-modal__aside { padding-block: 1.5rem; gap: 1rem; }
+  .mk-modal__aside > img { width: 7.5rem; }
+  .mk-modal__aside h2 { font-size: 2.75rem; }
+  .mk-modal__aside > div > p { font-size: .78rem; line-height: 1.45; }
+  .mk-modal__aside li { padding: .5rem 0; }
+}
+
+/* Keep the briefing surface continuous while constraining its readable content. */
+.mk-modal__aside {
+  flex: 1 1 auto;
+  max-width: none;
+  align-items: flex-start;
+}
+.mk-modal__aside > * { width: min(100%, 30rem); }
+.mk-modal__aside ol { align-self: stretch; max-width: 30rem; }
+
+.mk-field-error { color: var(--color-danger); font: 500 .72rem/1.45 var(--sans); letter-spacing: 0; }
+.mk-form-grid input[aria-invalid='true'] { border-color: var(--color-danger); box-shadow: 0 0 0 2px rgba(159,63,50,.12); }
+.mk-form-grid input[aria-invalid='false']:not(:placeholder-shown) { border-color: var(--color-success); }
+.mk-form-submit { min-height: 48px; }

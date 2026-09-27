@@ -8,16 +8,17 @@ export type Project = {
   model: string;
   budget: string;
   year: string;
+  status: 'Concept study';
   introduction: string;
   images: { src: string; alt: string; caption: string }[];
 };
 
-// Illustrative portfolio records based on the supplied page. Replace with approved project facts and photography.
+// Concept studies used to demonstrate MK's intended portfolio experience until approved project records are supplied.
 export const projects: Project[] = [
   {
     slug: 'cantilever-residence', title: 'Modern Cantilever Residence', category: 'Construction + glazing',
     location: 'Trichy, Tamil Nadu', area: '8,400 sq ft', duration: '18 months',
-    model: 'Turnkey residence', budget: '₹4.8 Cr', year: '2024',
+    model: 'Turnkey residence', budget: 'Indicative ₹4.8 Cr', year: '2024', status: 'Concept study',
     introduction: 'A study in structural clarity: an upper volume appears to float over a glazed living level, with landscape and warm interiors grounding the composition.',
     images: [
       { src: '/images/project-villa.webp', alt: 'Contemporary cantilevered villa exterior', caption: 'Exterior study' },
@@ -28,7 +29,7 @@ export const projects: Project[] = [
   {
     slug: 'minimalist-penthouse', title: 'Minimalist Penthouse', category: 'Interiors',
     location: 'Chennai, Tamil Nadu', area: '3,800 sq ft', duration: '9 months',
-    model: 'Interior fit-out', budget: '₹1.6 Cr', year: '2024',
+    model: 'Interior fit-out', budget: 'Indicative ₹1.6 Cr', year: '2024', status: 'Concept study',
     introduction: 'Quiet materials, low furniture, and carefully aligned joinery create a calm setting for everyday life above the city.',
     images: [
       { src: '/images/penthouse.webp', alt: 'Warm contemporary penthouse interior', caption: 'Living room' },
@@ -38,7 +39,7 @@ export const projects: Project[] = [
   {
     slug: 'monolith-villa', title: 'The Monolith Villa', category: 'Complete ecosystem',
     location: 'Coimbatore, Tamil Nadu', area: '11,200 sq ft', duration: '22 months',
-    model: 'Design and build', budget: '₹7.2 Cr', year: '2024',
+    model: 'Design and build', budget: 'Indicative ₹7.2 Cr', year: '2024', status: 'Concept study',
     introduction: 'An integrated residence concept connecting a strong exterior silhouette, finely detailed rooms, and generous openings to an outdoor terrace.',
     images: [
       { src: '/images/villa-hero.webp', alt: 'Modern villa illuminated at dusk', caption: 'Arrival view' },
@@ -49,7 +50,7 @@ export const projects: Project[] = [
   {
     slug: 'courtyard-pavilion', title: 'Courtyard Pavilion', category: 'Architecture + windows',
     location: 'Bengaluru, Karnataka', area: '5,600 sq ft', duration: '12 months',
-    model: 'Pavilion and glazing', budget: '₹2.4 Cr', year: '2023',
+    model: 'Pavilion and glazing', budget: 'Indicative ₹2.4 Cr', year: '2023', status: 'Concept study',
     introduction: 'A light garden pavilion concept where slim window profiles and sheltered outdoor rooms bring the landscape into view.',
     images: [
       { src: '/images/pavilion.webp', alt: 'Contemporary garden pavilion', caption: 'Garden elevation' },

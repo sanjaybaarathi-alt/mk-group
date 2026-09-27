@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
+import { axe } from 'jest-axe';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { HomeScreen } from './HomeScreen.tsx';
 
@@ -33,6 +34,19 @@ describe('MK Group home screen', () => {
     expect(url.origin + url.pathname).toBe('https://wa.me/919344237897');
     expect(url.searchParams.get('text')).toContain('Name: Sanjay');
     expect(url.searchParams.get('text')).not.toContain('separate quotation requested');
+  });
+  it('shows actionable inline errors for invalid contact details', () => {
+    render(<HomeScreen />);
+    fireEvent.click(screen.getByRole('button', { name: 'Enquire' }));
+    fireEvent.change(screen.getByRole('textbox', { name: /FULL NAME/i }), { target: { value: 'S' } });
+    fireEvent.blur(screen.getByRole('textbox', { name: /FULL NAME/i }));
+    expect(screen.getByText('Enter your full name.')).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /FULL NAME/i })).toHaveAttribute('aria-invalid', 'true');
+  });
+  it('has no automated accessibility violations in the enquiry dialog', async () => {
+    const { container } = render(<HomeScreen />);
+    fireEvent.click(screen.getByRole('button', { name: 'Enquire' }));
+    expect((await axe(container)).violations).toEqual([]);
   });
   it('prices selected services with approved rates', () => {
     render(<HomeScreen />);

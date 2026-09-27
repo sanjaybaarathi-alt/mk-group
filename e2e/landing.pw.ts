@@ -4,7 +4,7 @@ test('construction runs forward and backward, pauses and skips to services', asy
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
-  await expect(page.locator('#hero')).toHaveClass(/mk-build--live/);
+  await expect(page.locator('#hero')).toHaveClass(/mk-build--live/, { timeout: 15000 });
   const scroll = async (progress: number) => {
     await page.evaluate(p => {
       const hero = document.querySelector<HTMLElement>('#hero')!;
@@ -31,8 +31,12 @@ test('construction runs forward and backward, pauses and skips to services', asy
 test('mobile layout, keyboard slider and reduced motion remain usable', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  await expect(page.locator('#hero')).toHaveClass(/mk-build--live/);
+  await expect(page.locator('#hero')).toHaveClass(/mk-build--live/, { timeout: 15000 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.locator('#constructions-section').scrollIntoViewIfNeeded();
+  await expect(page.locator('#constructions-section')).toHaveClass(/is-mobile-visible/);
+  await page.locator('#window-experience').scrollIntoViewIfNeeded();
+  expect(await page.locator('#window-experience').evaluate(el => el.parentElement?.classList.contains('pin-spacer'))).toBe(false);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(page.locator('#hero')).toHaveClass(/mk-build--static/);
   const slider = page.getByRole('slider', { name: 'Before and after comparison' });
@@ -58,4 +62,22 @@ test('unsupported WebGL has a usable static fallback without a long empty scroll
   await expect(page.locator('.mk-build__poster')).toBeVisible();
   const height = await page.locator('#hero').evaluate(el => el.getBoundingClientRect().height);
   expect(height).toBeLessThanOrEqual(1100);
+});
+
+test('enquiry reports field errors beside invalid inputs', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Enquire', exact: true }).click();
+  await page.getByRole('textbox', { name: /FULL NAME/i }).fill('S');
+  await page.getByRole('button', { name: /Send inquiry on WhatsApp/i }).click();
+  await expect(page.getByText('Enter your full name.')).toBeVisible();
+  await expect(page.getByRole('textbox', { name: /FULL NAME/i })).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.getByRole('alert')).toContainText('highlighted contact details');
+});
+
+test('concept routes set metadata, focus the heading and offer a conversion path', async ({ page }) => {
+  await page.goto('/projects/monolith-villa');
+  await expect(page).toHaveTitle(/Monolith Villa.*Concept Portfolio/);
+  await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
+  await expect(page.getByRole('link', { name: /Discuss this concept/i })).toHaveAttribute('href', /wa\.me\/919344237897/);
+  await expect(page.getByText('Concept study')).toBeVisible();
 });

@@ -6,6 +6,7 @@ import { WindowExperience } from './WindowExperience.tsx';
 import { useHomeMotion } from './useHomeMotion.ts';
 import { useHomeScreenViewModel } from './HomeScreen.vm.ts';
 import './HomeScreen.css';
+import './EnquiryDialog.css';
 
 const services = [
   { id: 'constructions-section', index: '01', eyebrow: 'BUILD', name: 'MK Constructions', line: 'Structures shaped around how life unfolds.', copy: 'From feasibility and foundation to handover, one accountable team coordinates engineering, materials and execution.', image: '/images/structure.webp', logo: '/logos/mk-constructions.svg', division: 'constructions' as const },
@@ -30,8 +31,8 @@ function Comparison() {
   return <section className="mk-compare mk-reveal" aria-labelledby="comparison-title">
     <div className="mk-section-head"><span>05 / TRANSFORMATION</span><h2 id="comparison-title">One structure.<br/><em>A complete environment.</em></h2></div>
     <div id="comparison-container" className="mk-compare__frame" style={{ '--compare': `${comparison}%` } as React.CSSProperties} onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); setFromPointer(e); }} onPointerMove={(e) => { if (e.currentTarget.hasPointerCapture(e.pointerId)) setFromPointer(e); }} onPointerUp={(e) => e.currentTarget.releasePointerCapture(e.pointerId)}>
-      <img src="/images/comparison-after.webp" alt="Completed contemporary living space" />
-      <div className="mk-compare__before"><img src="/images/comparison-before.webp" alt="The same space during structural construction" /></div>
+      <img src="/images/comparison-after.webp" alt="Completed contemporary living space" loading="lazy" decoding="async" />
+      <div className="mk-compare__before"><img src="/images/comparison-before.webp" alt="The same space during structural construction" loading="lazy" decoding="async" /></div>
       <span className="mk-compare__label mk-compare__label--before">CONSTRUCTION</span><span className="mk-compare__label mk-compare__label--after">COMPLETION</span>
       <button type="button" className="mk-compare__handle" style={{ left: `${comparison}%` }} role="slider" aria-label="Before and after comparison" aria-valuemin={5} aria-valuemax={95} aria-valuenow={comparison} aria-valuetext={`${comparison}% construction image visible`} onKeyDown={key}><span aria-hidden="true">↔</span></button>
     </div>
@@ -64,8 +65,8 @@ export function HomeScreen() {
       </section>
       <section id="services" className="mk-services" aria-labelledby="services-title">
         <div className="mk-section-head mk-reveal"><span>02 / THE ECOSYSTEM</span><h2 id="services-title">Specialists in their craft.<br/><em>Aligned from day one.</em></h2></div>
-        {services.map((service, index) => <article id={service.id} className="mk-service mk-reveal" key={service.id}>
-          <div className="mk-service__visual"><img src={service.image} alt="" loading={index ? 'lazy' : 'eager'} /></div>
+        {services.map((service) => <article id={service.id} className="mk-service mk-reveal" key={service.id}>
+          <div className="mk-service__visual"><img src={service.image} alt="" loading="lazy" decoding="async" /></div>
           <div className="mk-service__copy"><span>{service.index} / {service.eyebrow}</span><img src={service.logo} alt="" aria-hidden="true" /><h3>{service.line}</h3><p>{service.copy}</p><button type="button" onClick={() => vm.openModal(service.division)}>Consult the team <span aria-hidden="true">↗</span></button></div>
         </article>)}
       </section>
@@ -90,8 +91,13 @@ export function HomeScreen() {
       </aside>
       <div id="modal-panel" className="mk-modal__panel" role="dialog" aria-modal="true" aria-label="Architectural consultation">
         <div className="mk-modal__head"><div><span>PROJECT ENQUIRY</span><h2>Tell us what you’re planning.</h2><div className="mk-modal__steps" aria-hidden="true"><span>01 / CONTACT</span><span>02 / SCOPE</span><span>03 / ESTIMATE</span></div></div><button type="button" aria-label="Close modal" onClick={vm.closeModal}>×</button></div>
-        <form id="project-form" onSubmit={submit}>
-          <div className="mk-form-grid"><label>FULL NAME *<input name="full_name" required autoComplete="name" placeholder="Your name" /></label><label>EMAIL ADDRESS<input type="email" name="email_address" autoComplete="email" placeholder="name@example.com" /></label><label>PHONE NUMBER *<input name="phone_number" required inputMode="tel" autoComplete="tel" placeholder="+91 98765 43210" /></label><label>SITE LOCATION / CITY *<input name="site_location_city" required placeholder="City or site location" /></label></div>
+        <form id="project-form" noValidate onSubmit={submit}>
+          <div className="mk-form-grid">
+            <label htmlFor="enquiry-name">FULL NAME *<input id="enquiry-name" name="full_name" required autoComplete="name" placeholder="Your name" aria-invalid={Boolean(vm.fieldErrors.full_name)} aria-describedby={vm.fieldErrors.full_name ? 'enquiry-name-error' : undefined} onBlur={(event) => vm.validateField('full_name', event.currentTarget.value)} />{vm.fieldErrors.full_name && <small id="enquiry-name-error" className="mk-field-error">{vm.fieldErrors.full_name}</small>}</label>
+            <label htmlFor="enquiry-email">EMAIL ADDRESS<input id="enquiry-email" type="email" name="email_address" autoComplete="email" placeholder="name@example.com" aria-invalid={Boolean(vm.fieldErrors.email_address)} aria-describedby={vm.fieldErrors.email_address ? 'enquiry-email-error' : undefined} onBlur={(event) => vm.validateField('email_address', event.currentTarget.value)} />{vm.fieldErrors.email_address && <small id="enquiry-email-error" className="mk-field-error">{vm.fieldErrors.email_address}</small>}</label>
+            <label htmlFor="enquiry-phone">PHONE NUMBER *<input id="enquiry-phone" name="phone_number" required inputMode="tel" autoComplete="tel" placeholder="+91 98765 43210" aria-invalid={Boolean(vm.fieldErrors.phone_number)} aria-describedby={vm.fieldErrors.phone_number ? 'enquiry-phone-error' : undefined} onBlur={(event) => vm.validateField('phone_number', event.currentTarget.value)} />{vm.fieldErrors.phone_number && <small id="enquiry-phone-error" className="mk-field-error">{vm.fieldErrors.phone_number}</small>}</label>
+            <label htmlFor="enquiry-location">SITE LOCATION / CITY *<input id="enquiry-location" name="site_location_city" required autoComplete="address-level2" placeholder="City or site location" aria-invalid={Boolean(vm.fieldErrors.site_location_city)} aria-describedby={vm.fieldErrors.site_location_city ? 'enquiry-location-error' : undefined} onBlur={(event) => vm.validateField('site_location_city', event.currentTarget.value)} />{vm.fieldErrors.site_location_city && <small id="enquiry-location-error" className="mk-field-error">{vm.fieldErrors.site_location_city}</small>}</label>
+          </div>
           <EnquiryEstimator vm={vm} />
           <section className="mk-engineers" aria-labelledby="engineers-title">
             <div className="mk-engineers__intro"><span>YOUR PROJECT TEAM</span><h3 id="engineers-title">Reviewed by civil engineers.</h3><p>Your enquiry is reviewed directly by MK's engineering team before the conversation continues.</p></div>
