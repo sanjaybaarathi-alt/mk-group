@@ -72,7 +72,18 @@ export function useHomeMotion(root: React.RefObject<HTMLElement | null>): void {
         element.querySelectorAll<HTMLElement>('.mk-process li').forEach((row, index) => {
           gsap.fromTo(row, { x: index % 2 ? 18 : -18, opacity: .25 }, { x: 0, opacity: 1, duration: .65, ease: 'power2.out', scrollTrigger: { trigger: row, start: 'top 88%', once: true } });
         });
-        element.querySelectorAll<HTMLElement>('.mk-projects__item').forEach((card, index) => {
+        const teamSection = element.querySelector<HTMLElement>('.mk-team');
+        if (teamSection) {
+          const teamLine = teamSection.querySelector<HTMLElement>('.mk-team__line');
+          const portraits = teamSection.querySelectorAll<HTMLElement>('.mk-team__image-wrap');
+          const details = teamSection.querySelectorAll<HTMLElement>('.mk-team__details');
+          const footer = teamSection.querySelector<HTMLElement>('.mk-team__footer');
+          const teamTimeline = gsap.timeline({ scrollTrigger: { trigger: teamSection, start: 'top 72%', once: true } });
+          if (teamLine) teamTimeline.fromTo(teamLine, { scaleX: 0 }, { scaleX: 1, duration: .8, ease: 'power3.inOut' });
+          teamTimeline.fromTo(portraits, { clipPath: 'inset(100% 0 0 0)', y: 28 }, { clipPath: 'inset(0% 0 0 0)', y: 0, duration: 1.05, stagger: .13, ease: 'power3.out' }, .14);
+          teamTimeline.fromTo(details, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: .58, stagger: .12, ease: 'power2.out' }, .62);
+          if (footer) teamTimeline.fromTo(footer, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: .5, ease: 'power2.out' }, .88);
+        }        element.querySelectorAll<HTMLElement>('.mk-projects__item').forEach((card, index) => {
           gsap.fromTo(card, { y: 24 + index * 4, opacity: .2 }, { y: 0, opacity: 1, duration: .7, ease: 'power2.out', scrollTrigger: { trigger: card, start: 'top 90%', once: true } });
         });
       });

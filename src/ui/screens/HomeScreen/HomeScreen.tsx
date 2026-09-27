@@ -2,6 +2,7 @@ import { useRef, useState, type FormEvent, type PointerEvent } from 'react';
 import { ProjectGallery } from '../../projects/ProjectGallery.tsx';
 import { EnquiryEstimator } from './EnquiryEstimator.tsx';
 import { ScrollConstructionHero } from './ScrollConstructionHero.tsx';
+import { TeamSection } from './TeamSection.tsx';
 import { WindowExperience } from './WindowExperience.tsx';
 import { useHomeMotion } from './useHomeMotion.ts';
 import { useHomeScreenViewModel } from './HomeScreen.vm.ts';
@@ -29,7 +30,7 @@ function Comparison() {
     else if (event.key in changes) { event.preventDefault(); setComparison(Math.min(95, Math.max(5, comparison + changes[event.key]))); }
   };
   return <section className="mk-compare mk-reveal" aria-labelledby="comparison-title">
-    <div className="mk-section-head"><span>05 / TRANSFORMATION</span><h2 id="comparison-title">One structure.<br/><em>A complete environment.</em></h2></div>
+    <div className="mk-section-head"><span>06 / TRANSFORMATION</span><h2 id="comparison-title">One structure.<br/><em>A complete environment.</em></h2></div>
     <div id="comparison-container" className="mk-compare__frame" style={{ '--compare': `${comparison}%` } as React.CSSProperties} onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); setFromPointer(e); }} onPointerMove={(e) => { if (e.currentTarget.hasPointerCapture(e.pointerId)) setFromPointer(e); }} onPointerUp={(e) => e.currentTarget.releasePointerCapture(e.pointerId)}>
       <img src="/images/comparison-after.webp" alt="Completed contemporary living space" loading="lazy" decoding="async" />
       <div className="mk-compare__before"><img src="/images/comparison-before.webp" alt="The same space during structural construction" loading="lazy" decoding="async" /></div>
@@ -75,10 +76,11 @@ export function HomeScreen() {
         <div className="mk-section-head"><span>03 / ONE ACCOUNTABLE PROCESS</span><h2 id="process-title">From first line<br/><em>to final light.</em></h2></div>
         <ol><li><span>01</span><div><h3>Discover</h3><p>Site, ambition, priorities and budget are understood before solutions are drawn.</p></div></li><li><span>02</span><div><h3>Resolve</h3><p>Architecture, interiors and the building envelope are coordinated as one system.</p></div></li><li><span>03</span><div><h3>Build</h3><p>Sequenced execution, measured quality checks and clear progress keep work accountable.</p></div></li><li><span>04</span><div><h3>Complete</h3><p>Final details, commissioning and handover bring every discipline into alignment.</p></div></li></ol>
       </section>
+      <TeamSection onEnquire={() => vm.openModal()} />
       <ProjectGallery />
       <Comparison />
       <section id="contact" className="mk-closing mk-reveal">
-        <span>06 / BEGIN A CONVERSATION</span><h2>Bring us the site.<br/>We’ll shape what comes next.</h2><button type="button" onClick={() => vm.openModal()}>Plan your project <span aria-hidden="true">↗</span></button>
+        <span>07 / BEGIN A CONVERSATION</span><h2>Bring us the site.<br/>We’ll shape what comes next.</h2><button type="button" onClick={() => vm.openModal()}>Plan your project <span aria-hidden="true">↗</span></button>
       </section>
     </main>
     <footer className="mk-footer"><img src="/logos/mk-group.svg" alt="MK Group of Companies" /><p>Construction · Interior design · Precision windows</p><a href="https://wa.me/919344237897" target="_blank" rel="noreferrer">WhatsApp ↗</a><small>© {new Date().getFullYear()} MK Group of Companies</small></footer>
@@ -99,13 +101,7 @@ export function HomeScreen() {
             <label htmlFor="enquiry-location">SITE LOCATION / CITY *<input id="enquiry-location" name="site_location_city" required autoComplete="address-level2" placeholder="City or site location" aria-invalid={Boolean(vm.fieldErrors.site_location_city)} aria-describedby={vm.fieldErrors.site_location_city ? 'enquiry-location-error' : undefined} onBlur={(event) => vm.validateField('site_location_city', event.currentTarget.value)} />{vm.fieldErrors.site_location_city && <small id="enquiry-location-error" className="mk-field-error">{vm.fieldErrors.site_location_city}</small>}</label>
           </div>
           <EnquiryEstimator vm={vm} />
-          <section className="mk-engineers" aria-labelledby="engineers-title">
-            <div className="mk-engineers__intro"><span>YOUR PROJECT TEAM</span><h3 id="engineers-title">Reviewed by civil engineers.</h3><p>Your enquiry is reviewed directly by MK's engineering team before the conversation continues.</p></div>
-            <div className="mk-engineers__list">
-              <article><span className="mk-engineers__portrait" aria-hidden="true">P</span><div><strong>Praveen</strong><small>B.E. Civil Engineering</small><small>6 years' experience</small></div></article>
-              <article><span className="mk-engineers__portrait" aria-hidden="true">D</span><div><strong>Dhilip Kumar</strong><small>B.E. Civil Engineering</small><small>6 years' experience</small></div></article>
-            </div>
-          </section>
+          <p className="mk-form-review"><strong>Direct engineering review.</strong> Your project brief will be reviewed by Praveen or Dhilip Kumar, B.E. Civil Engineers with six years of experience.</p>
           <label className="mk-form-notes">BRIEF PROJECT NOTES<textarea name="brief_project_notes" rows={4} placeholder="Timeline, site status, priorities or anything useful." /></label>
           {vm.formError && <p role="alert" className="mk-form-error">{vm.formError}</p>}
           {vm.whatsappUrl && <p role="status" className="mk-form-status">Your enquiry is ready. Review it and press Send in WhatsApp. <a href={vm.whatsappUrl} target="_blank" rel="noreferrer">Open it again ↗</a></p>}
