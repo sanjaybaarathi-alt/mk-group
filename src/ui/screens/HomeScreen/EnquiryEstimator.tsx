@@ -3,10 +3,10 @@ import { constructionTiers, formatInr, interiorTiers, windowTiers, type Construc
 import './EnquiryEstimator.css';
 
 type ViewModel = ReturnType<typeof useHomeScreenViewModel>;
-const serviceChoices: { key: keyof EnquiryServices; label: string }[] = [
-  { key: 'construction', label: 'MK Constructions' },
-  { key: 'interiors', label: 'MK Design Interriors' },
-  { key: 'windows', label: 'MK Precision Windows' },
+const serviceChoices: { key: keyof EnquiryServices; label: string; detail: string }[] = [
+  { key: 'construction', label: 'MK Constructions', detail: 'Build or renovate' },
+  { key: 'interiors', label: 'MK Design Interiors', detail: 'Plan and furnish' },
+  { key: 'windows', label: 'MK Precision Windows', detail: 'Measure and install' },
 ];
 
 function AreaControl({ id, name, label, value, max, onChange }: { id: string; name: string; label: string; value: number; max: number; onChange: (value: number) => void }) {
@@ -22,7 +22,7 @@ export function EnquiryEstimator({ vm }: { vm: ViewModel }) {
   return <div className="mk-estimator">
     <fieldset className="mk-estimator__services">
       <legend>DISCIPLINES REQUIRED <span>(SELECT ALL THAT APPLY)</span></legend>
-      <div className="mk-estimator__service-grid">{serviceChoices.map(({ key, label }) => <label key={key} className={vm.services[key] ? 'is-selected' : ''}><input type="checkbox" name="discipline" value={label} checked={vm.services[key]} onChange={() => vm.setServices({ ...vm.services, [key]: !vm.services[key] })} /><span>{label}</span></label>)}</div>
+      <div className="mk-estimator__service-grid">{serviceChoices.map(({ key, label, detail }, index) => <label key={key} className={vm.services[key] ? 'is-selected' : ''}><input aria-label={label} type="checkbox" name="discipline" value={label} checked={vm.services[key]} onChange={() => vm.setServices({ ...vm.services, [key]: !vm.services[key] })} /><span><b>0{index + 1}</b><strong>{label}</strong><small>{detail}</small></span></label>)}</div>
     </fieldset>
     <div className="mk-estimator__field"><label htmlFor="project-property-type">PROPERTY TYPE</label><select id="project-property-type" name="property_type" defaultValue="Independent home"><option>Independent home</option><option>Villa</option><option>Penthouse</option><option>Commercial space</option></select></div>
     {vm.services.construction && <div className="mk-estimator__group">

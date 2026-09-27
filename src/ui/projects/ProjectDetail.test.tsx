@@ -16,7 +16,7 @@ describe('project archive', () => {
   it('links every sample project to an individual page', () => {
     render(<ProjectGallery />);
     expect(screen.getAllByRole('link', { name: /case study/i })).toHaveLength(4);
-    expect(screen.getByRole('link', { name: /Monolith Villa case study/i })).toHaveAttribute('href', '#/projects/monolith-villa');
+    expect(screen.getByRole('link', { name: /Monolith Villa case study/i })).toHaveAttribute('href', '/projects/monolith-villa');
   });
 
   it('shows project particulars and switches selected gallery image', () => {
@@ -34,12 +34,12 @@ describe('project archive', () => {
     vi.stubGlobal('matchMedia', () => ({ matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() }));
     const gallery = render(<ProjectGallery />);
     fireEvent.click(screen.getByRole('link', { name: /Monolith Villa case study/i }));
-    expect(window.location.hash).toBe('#/projects/monolith-villa');
+    expect(window.location.pathname).toBe('/projects/monolith-villa');
     expect(document.querySelector('.mk-project-transition img')).toHaveAttribute('src', '/images/villa-hero.webp');
     gallery.unmount();
     render(<ProjectDetail slug="monolith-villa" />);
     await waitFor(() => expect(document.querySelector('.mk-project-transition')).not.toBeInTheDocument(), { timeout: 2500 });
     expect(document.querySelector('.mk-detail__hero img')).toHaveAttribute('src', '/images/villa-hero.webp');
-    window.location.hash = '';
+    history.replaceState(null, '', '/');
   });
 });

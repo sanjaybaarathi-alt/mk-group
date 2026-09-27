@@ -12,16 +12,16 @@ export function WindowExperience() {
     gsap.registerPlugin(ScrollTrigger);
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
-      const mobile = window.matchMedia('(max-width: 767px)').matches;
       const context = gsap.context(() => {
+        const mobile = window.matchMedia('(max-width: 767px)').matches;
         const timeline = gsap.timeline({
           defaults: { ease: 'none' },
           scrollTrigger: {
             trigger: section,
-            start: 'top top',
-            end: () => `+=${Math.round(window.innerHeight * (mobile ? 1.35 : 2.5))}`,
-            pin: true,
-            scrub: true,
+            start: mobile ? 'top 78%' : 'top top',
+            end: mobile ? 'bottom 28%' : () => `+=${Math.round(window.innerHeight * 1.35)}`,
+            pin: !mobile,
+            scrub: mobile ? .45 : .3,
             invalidateOnRefresh: true,
           },
         });
@@ -36,8 +36,8 @@ export function WindowExperience() {
           .fromTo('.mk-window__line--middle', { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: .14 }, .42)
           .to('.mk-window__line--middle', { autoAlpha: 0, y: -12, duration: .12 }, .77)
           .fromTo('.mk-window__line--final', { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: .12 }, .85)
-          .to('.mk-window__assembly', { scale: mobile ? 1.32 : 1.72, opacity: .08, duration: .12 }, .9)
-          .to('.mk-window__view', { scale: mobile ? 1.09 : 1.16, duration: .12 }, .9);
+          .to('.mk-window__assembly', { scale: 1.015, duration: .15 }, .85)
+          .to('.mk-window__view', { scale: 1.045, duration: .12 }, .9);
       }, section);
       return () => context.revert();
     });

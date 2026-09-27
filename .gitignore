@@ -4,3 +4,11 @@ dist/
 *.tsbuildinfo
 artifacts/
 mk-group-cloudflare-preview.zip
+
+test-results/
+playwright-report/
+
+# Local Codex and project skills
+/Skills/
+/.agents/skills/
+

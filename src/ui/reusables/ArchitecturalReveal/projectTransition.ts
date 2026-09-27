@@ -48,7 +48,7 @@ export function beginProjectTransition(event: MouseEvent<HTMLAnchorElement>, slu
   const transition: PendingTransition = { slug, overlay, image, title, timeout: 0 };
   transition.timeout = window.setTimeout(() => clearTransition(transition), 1800);
   pending = transition;
-  window.location.hash = `/projects/${slug}`;
+  history.pushState(null, '', `/projects/${slug}`); window.dispatchEvent(new PopStateEvent('popstate'));
 }
 
 export function finishProjectTransition(slug: string, hero: HTMLElement, heading: HTMLElement) {

@@ -47,7 +47,6 @@ export function buildWhatsAppEnquiry(details: EnquiryDetails): string {
     lines.push(`Windows: ${windowTiers[details.windowTier].label}, ${details.glazingArea.toLocaleString('en-IN')} sq ft glazing area`);
   }
   if (details.estimatedTotal) lines.push(`Indicative priced-services subtotal: ${formatInr(details.estimatedTotal)}`);
-  if (details.services.interiors) lines.push('Interior design: separate quotation requested');
   if (details.notes) lines.push('', 'Project notes:', details.notes);
   lines.push('', 'Please contact me regarding this requirement.', '— Inquiry from MK Group Website');
   return lines.join('\n');

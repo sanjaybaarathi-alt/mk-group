@@ -5,22 +5,14 @@ import { ProjectDetail } from './ui/projects/ProjectDetail.tsx';
 import './app.css';
 
 function App() {
-  const [hash, setHash] = useState(window.location.hash);
+  const [path, setPath] = useState(window.location.pathname);
   useEffect(() => {
-    const update = () => setHash(window.location.hash);
-    window.addEventListener('hashchange', update);
-    return () => window.removeEventListener('hashchange', update);
+    const update = () => setPath(window.location.pathname);
+    window.addEventListener('popstate', update);
+    return () => window.removeEventListener('popstate', update);
   }, []);
-  useEffect(() => {
-    if (hash.startsWith('#/projects/')) { window.scrollTo(0, 0); return; }
-    if (hash === '#projects') requestAnimationFrame(() => document.getElementById('projects')?.scrollIntoView());
-  }, [hash]);
-  const slug = hash.startsWith('#/projects/') ? decodeURIComponent(hash.slice('#/projects/'.length)) : null;
-  return slug ? <ProjectDetail slug={slug} /> : <HomeScreen />;
+  useEffect(() => { window.scrollTo(0, 0); }, [path]);
+  const match = path.match(/^\/projects\/([^/]+)\/?$/);
+  return match ? <ProjectDetail slug={decodeURIComponent(match[1])} /> : <HomeScreen />;
 }
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-);
+createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>);
