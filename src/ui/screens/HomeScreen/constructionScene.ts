@@ -72,7 +72,9 @@ export function createConstructionScene(canvas: HTMLCanvasElement) {
     const bounds = canvas.getBoundingClientRect();
     renderer.setSize(Math.max(1, bounds.width), Math.max(1, bounds.height), false);
     camera.aspect = bounds.width / Math.max(1, bounds.height);
-    viewDistance = camera.aspect < 1.1 ? 1.42 : camera.aspect < 1.55 ? 1.15 : 1;
+    const narrowPortrait = camera.aspect < .62;
+    viewDistance = narrowPortrait ? 2.08 : camera.aspect < 1.1 ? 1.52 : camera.aspect < 1.55 ? 1.15 : 1;
+    house.root.position.x = narrowPortrait ? .35 : 2.25;
     camera.updateProjectionMatrix();
     requestDraw();
   };

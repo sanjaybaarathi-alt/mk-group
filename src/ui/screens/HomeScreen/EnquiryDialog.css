@@ -56,13 +56,6 @@
 .mk-form-grid { gap: 1rem 1.25rem; }
 .mk-form-grid input, .mk-form-notes textarea { min-height: 3.05rem; padding: .75rem .85rem; }
 
-/* Mobile ecosystem cards visibly assemble as they enter the viewport. */
-@media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
-  .mk-service .mk-service__visual { clip-path: inset(0 0 10% 0); transform: translateY(1.5rem); transition: clip-path .85s cubic-bezier(.2,.8,.2,1), transform .85s cubic-bezier(.2,.8,.2,1); }
-  .mk-service .mk-service__copy { transform: translateY(1rem); transition: transform .7s .12s cubic-bezier(.2,.8,.2,1); }
-  .mk-service.is-mobile-visible .mk-service__visual { clip-path: inset(0); transform: none; }
-  .mk-service.is-mobile-visible .mk-service__copy { transform: none; }
-}
 @media (max-width: 1100px) {
   .mk-modal { justify-content: flex-end; }
   .mk-modal__panel { flex-basis: min(100%, 50rem); width: min(100%, 50rem); }

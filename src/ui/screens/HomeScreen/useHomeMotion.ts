@@ -52,20 +52,14 @@ export function useHomeMotion(root: React.RefObject<HTMLElement | null>): void {
           const visual = article.querySelector<HTMLElement>('.mk-service__visual');
           const image = article.querySelector<HTMLElement>('.mk-service__visual img');
           const copy = article.querySelectorAll<HTMLElement>('.mk-service__copy > *');
-          if (visual) gsap.fromTo(visual, { clipPath: 'inset(0 0 16% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: .9, ease: 'power3.out', scrollTrigger: { trigger: article, start: 'top 82%', once: true } });
-          if (copy.length) gsap.fromTo(copy, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: .55, stagger: .055, ease: 'power2.out', scrollTrigger: { trigger: article, start: 'top 75%', once: true } });
-          if (image && matchMedia('(min-width: 1024px) and (pointer: fine)').matches) {
-            gsap.fromTo(image, { scale: 1.08 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: visual, start: 'top bottom', end: 'bottom top', scrub: .25 } });
-            gsap.to(article, { scale: .965, transformOrigin: 'center top', ease: 'none', scrollTrigger: { trigger: article, start: 'bottom 92%', end: 'bottom top', scrub: .35 } });
-          }
-          if (matchMedia('(max-width: 900px)').matches) {
-            ScrollTrigger.create({
-              trigger: article,
-              start: 'top 88%',
-              once: true,
-              onEnter: () => article.classList.add('is-mobile-visible'),
-            });
-          }
+          const reveal = gsap.timeline({
+            scrollTrigger: { trigger: article, start: 'top 84%', once: true },
+            onStart: () => article.classList.add('is-mobile-visible'),
+          });
+          if (visual) reveal.fromTo(visual, { clipPath: 'inset(0 0 16% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: .9, ease: 'power3.out' });
+          if (copy.length) reveal.fromTo(copy, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: .55, stagger: .06, ease: 'power2.out' }, .22);
+          if (image && visual) gsap.fromTo(image, { scale: 1.08 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: visual, start: 'top bottom', end: 'bottom top', scrub: .25 } });
+          gsap.to(article, { scale: .965, transformOrigin: 'center top', ease: 'none', scrollTrigger: { trigger: article, start: 'bottom 92%', end: 'bottom top', scrub: .35 } });
         });
         const introHeading = element.querySelector<HTMLElement>('.mk-intro h2');
         if (introHeading && matchMedia('(min-width: 901px)').matches) gsap.fromTo(introHeading, { xPercent: 3 }, { xPercent: -2, ease: 'none', scrollTrigger: { trigger: '.mk-intro', start: 'top bottom', end: 'bottom top', scrub: .35 } });
